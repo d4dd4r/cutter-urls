@@ -1,3 +1,17 @@
 app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+  resource: '@AppBundle/Controller/'
+  type: annotation
+
+cutter-main:
+  path: /cutter-url/
+  defaults: { _controller: AppBundle:CutterUrl:index }
+
+cutter-info:
+  path: /cutter-url/info/{urlId}
+  defaults: { _controller: AppBundle:CutterUrl:info, urlId: 0 }
+  requirements:
+    urlId: '\d+'
+
+cutter-save:
+  path:  /cutter-url/save-url
+  defaults: { _controller: AppBundle:CutterUrl:saveUrl }
