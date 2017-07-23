@@ -28,6 +28,11 @@ input[readonly="true"] {
   cursor: pointer;
 }
 
+form a {
+  display: block;
+  margin-top: 15px;
+}
+
 .content-spinner-extra-small,
 .content-spinner-small,
 .content-spinner-medium,
@@ -46,20 +51,12 @@ input[readonly="true"] {
   top: 0;
   left: 0;
   z-index: 99;
-  background-image: url({{ asset('public/images/spinner.svg')
+  background-image: url('../images/spinner.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(88, 88, 88, .3);
 }
 
-
-}
-);
-background-repeat: no-repeat;
-background-position: center;
-background-color: rgba(88,
-88,
-88,
-0.3);
-
-}
 .content-spinner-extra-small::before {
   background-size: 25px;
 }
