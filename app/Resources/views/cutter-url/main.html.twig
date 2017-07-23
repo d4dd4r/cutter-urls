@@ -6,21 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Symfony</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .container {
-      width: 100vw;
-      height: 100vh;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ asset('public/css/cutter-url.css') }}">
 </head>
 
 <body>
@@ -34,13 +20,20 @@
     <div class="row center-xs middle-xs">
       <div class="col-xs-6">
         <form action="">
-          <input type="text">
+          <input type="text" value="http://symfony.com/doc/current/bundles/DoctrineMigrationsBundle/index.html">
           <button type="submit">Go!</button>
-          <input type="text" id="uriResult">
+          <input type="text" id="uriResult" readonly="true">
+          <span>Copied</span>
         </form>
       </div>
     </div>
   </div>
 </body>
 
+<script
+  src="http://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+<script src="{{ asset('public/js/spinner.js') }}"></script>
+<script src="{{ asset('public/js/cutter-url.js') }}"></script>
 </html>
