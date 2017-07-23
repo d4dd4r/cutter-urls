@@ -1,0 +1,34 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  text-align: center;
+  width: 100vw;
+  padding: 1vw;
+  border-spacing: 0;
+}
+
+table th,
+table td {
+  padding: 1vh;
+}
+
+table th,
+table td {
+  padding: 1vh;
+  border: solid thin #444;
+}
+
+thead tr {
+  background-color: #dedede;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #eee;
+}
