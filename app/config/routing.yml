@@ -9,7 +9,7 @@ redirect:
     urlId: '\d{12}'
 
 cutter-main:
-  path: /cutter-url
+  path: /cutter-url/
   defaults: { _controller: AppBundle:CutterUrl:index }
 
 cutter-info:
