@@ -113,6 +113,19 @@ class Url
     }
 
     /**
+     * Increase countJumps
+     *
+     * @param integer $countJumps
+     * @return Url
+     */
+    public function increasCountJumps()
+    {
+        $this->countJumps ++;
+
+        return $this;
+    }
+
+    /**
      * Get countJumps
      *
      * @return integer

@@ -13,22 +13,6 @@ class CutterUrlController extends Controller
 {
     public function indexAction()
     {
-        // $em = $this->getDoctrine()->getManager();
-        // dump($em);
-        // $url = new Url();
-
-        // $url->setUrl('https://www.yandex.ru');
-        // $url->setUri('/11111sss');
-        // $url->setCountJumps(0);
-
-        // $em->persist($url);
-        // $em->flush();
-
-        // $uri = $this->getDoctrine()
-        //     ->getRepository(Url::class)
-        //     ->find(1)
-        //     ->getUri();
-
         return $this->render('cutter-url/main.html.twig');
     }
 

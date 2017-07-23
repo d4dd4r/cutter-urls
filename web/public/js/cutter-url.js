@@ -34,7 +34,9 @@ $(function() {
             },
             success: function(data) {
                 if (data) data = JSON.parse(data);
-                if (data.status !== 'success') alert('something went wrong.');
+                if (data.status !== 'success') {
+                    return alert('something went wrong.');
+                }
 
                 var baseUrl = window.location.origin;
                 var urlCompressed = data.data.urlCompressed;

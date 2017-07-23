@@ -2,6 +2,12 @@ app:
   resource: '@AppBundle/Controller/'
   type: annotation
 
+redirect:
+  path: /{uri}
+  defaults: { _controller: AppBundle:Default:redirect }
+  requirements:
+    urlId: '\d{12}'
+
 cutter-main:
   path: /cutter-url/
   defaults: { _controller: AppBundle:CutterUrl:index }
