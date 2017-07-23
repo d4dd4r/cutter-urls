@@ -25,8 +25,11 @@ class DefaultController extends Controller
         $em = $doctrine->getManager();
 
         $urlEntity = $repository->findOneByUri($uri);
-        $urlEntity->increasCountJumps();
+        if (empty($urlEntity)) {
+            return $this->render('cutter-url/nolink.html.twig');
+        }
 
+        $urlEntity->increasCountJumps();
         $url = $urlEntity->getUrl();
 
         $em->persist($urlEntity);

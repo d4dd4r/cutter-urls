@@ -54,7 +54,6 @@ class CutterUrlController extends Controller
 
         $urlEntity->setUrl($url);
         $urlEntity->setUri($shortUri);
-        $urlEntity->setCountJumps(0);
 
         $em->persist($urlEntity);
         $em->flush();

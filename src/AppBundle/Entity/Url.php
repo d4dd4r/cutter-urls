@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="url")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UrlRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Url
 {
@@ -40,7 +41,14 @@ class Url
      *
      * @ORM\Column(name="count_jumps", type="integer", options={"default" : 0})
      */
-    private $countJumps;
+    private $countJumps = 0;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime", nullable=true)
+     */
+    private $created;
 
 
     /**
@@ -133,5 +141,29 @@ class Url
     public function getCountJumps()
     {
         return $this->countJumps;
+    }
+
+    /**
+     * Set created
+     *
+     * @param datetime $created
+     * @return Url
+     * @ORM\PrePersist
+     */
+    public function setCreated($created)
+    {
+        $this->created = new \DateTime('now');
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return datetime
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 }
