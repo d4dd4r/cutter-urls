@@ -9,32 +9,38 @@
 </head>
 
 <body>
-  <h1>Urls list</h1>
+  <h1>Url</h1>
 
   <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Url</th>
-        <th>Uri</th>
-        <th>Count of jumps</th>
-        <th>Created</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
     <tbody>
-      {% for url in urls %}
       <tr>
-        <td><a href="{{ path('cutter-info-each') }}/{{ url.id }}">{{ url.id }}</a></td>
-        <td>{{ url.url }}</td>
-        <td>{{ url.uri }}</td>
-        <td>{{ url.countJumps }}</td>
-        <td>{% if url.created %}{{ url.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-        <td><a href="{{ path('cutter-info-each') }}/{{ url.id }}">show</a></td>
+        <th>Id:</th>
+        <td>{{ url.id }}</td>
       </tr>
-      {% endfor %}
+      <tr>
+        <th>Url:</th>
+        <td>{{ url.url }}</td>
+      </tr>
+      <tr>
+        <th>Uri:</th>
+        <td>{{ url.uri }}</td>
+      </tr>
+      <tr>
+        <th>Count of jumps:</th>
+        <td>{{ url.countJumps }}</td>
+      </tr>
+      <tr>
+        <th>Created:</th>
+        <td>{% if url.created %}{{ url.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+      </tr>
     </tbody>
   </table>
+
+  <ul>
+    <li>
+      <a href="{{ path('cutter-info') }}">Back to the list</a>
+    </li>
+  </ul>
 </body>
 
 </html>

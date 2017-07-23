@@ -16,11 +16,26 @@ class CutterUrlController extends Controller
         return $this->render('cutter-url/main.html.twig');
     }
 
-    public function infoAction($urlId)
+    public function infoAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $urls = $em->getRepository(Url::class)->findAll();
+
         return $this->render('cutter-url/info.html.twig', [
-            'page' => $urlId
+            'urls' => $urls
         ]);
+    }
+
+    public function infoEachAction($urlId)
+    {
+        $doctrine = $this->getDoctrine();
+        $repository = $doctrine->getRepository(Url::class);
+
+        $url = $repository->find($urlId);
+
+        return $this->render('cutter-url/infoEach.html.twig', array(
+            'url' => $url,
+        ));
     }
 
     public function saveUrlAction(Request $request)

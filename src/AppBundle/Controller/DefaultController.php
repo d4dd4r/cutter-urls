@@ -35,7 +35,6 @@ class DefaultController extends Controller
         $em->persist($urlEntity);
         $em->flush();
 
-        // return $this->render('cutter-url/main.html.twig');
         return $this->redirect($url);
     }
 }
