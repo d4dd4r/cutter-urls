@@ -3,10 +3,9 @@
 namespace AppBundle\Controller;
 
 // use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
+// use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\Url;
 use AppBundle\Utils\UrlCompressHelper;
 
 class CutterUrlController extends Controller
@@ -33,9 +32,9 @@ class CutterUrlController extends Controller
 
         $url = $repository->find($urlId);
 
-        return $this->render('cutter-url/infoEach.html.twig', array(
-            'url' => $url,
-        ));
+        return $this->render('cutter-url/infoEach.html.twig', [
+            'url' => $url
+        ]);
     }
 
     public function saveUrlAction(Request $request)
@@ -45,34 +44,8 @@ class CutterUrlController extends Controller
         }
 
         $url = $request->request->get('url');
-        if (empty($url) || !UrlCompressHelper::isGoodResponse($url)) {
-            return new Response(json_encode([
-                'status' => 'fail'
-            ]));
-        }
+        $urlHelper = new UrlCompressHelper($this->container);
 
-        $urlCompressed = $this->saveUrl($url);
-
-        return new Response(json_encode([
-            'status' => 'success',
-            'data' => [
-                'url' => $url,
-                'urlCompressed' => $urlCompressed
-            ],
-        ]));
-    }
-
-    private function saveUrl($url) {
-        $em = $this->getDoctrine()->getManager();
-        $shortUri = UrlCompressHelper::getShortUri();
-        $urlEntity = new Url();
-
-        $urlEntity->setUrl($url);
-        $urlEntity->setUri($shortUri);
-
-        $em->persist($urlEntity);
-        $em->flush();
-
-        return $shortUri;
+        return $urlHelper->saveUrl($url);
     }
 }

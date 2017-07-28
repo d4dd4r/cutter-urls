@@ -2,16 +2,46 @@
 
 namespace AppBundle\Utils;
 
+use AppBundle\Entity\Url;
+
 class UrlCompressHelper
 {
-    public static function isGoodResponse($url)
-    {
-        $code = self::getHttpResponseCode($url);
+    private $container;
 
-        return $code === 200;
+    public function __construct($container)
+    {
+        $this->container = $container;
     }
 
-    public static function getShortUri()
+    public function saveUrl($url)
+    {
+        if (!$this->isGoodResponse($url)) {
+            return json_encode([
+                'status' => 'fail',
+                'code' => 'Url has wrong code response'
+            ]);
+        }
+
+        $urlCompressed = $this->getCompressedUrl($url);
+
+        $urlEntity = new Url();
+        $urlEntity->setUrl($url);
+        $urlEntity->setUri($urlCompressed);
+
+        $em = $this->container->get('doctrine')->getManager();
+        $em->persist($urlEntity);
+        $em->flush();
+
+        return json_encode([
+            'status' => 'success',
+            'data' => [
+                'url' => $url,
+                'urlCompressed' => $urlCompressed
+            ]
+        ]);
+    }
+
+    private function getCompressedUrl()
     {
         $symbols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
         $string = time() . mt_rand(10, 99);
@@ -24,7 +54,19 @@ class UrlCompressHelper
         return $url;
     }
 
-    private static function getHttpResponseCode($url)
+    private function isUrlValid($url)
+    {
+        //
+    }
+
+    private function isGoodResponse($url)
+    {
+        $code = $this->getHttpResponseCode($url);
+
+        return $code === 200;
+    }
+
+    private function getHttpResponseCode($url)
     {
         $headers = get_headers($url);
 
