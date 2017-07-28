@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use AppBundle\Utils\UrlCompressHelper;
 
-class MyTestCommand extends ContainerAwareCommand
+class UrlCompressCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
@@ -37,12 +37,13 @@ class MyTestCommand extends ContainerAwareCommand
             ]);
         } else {
             $urlCompressed = $response['data']['urlCompressed'];
+            $serverName = $this->getContainer()->getParameter('server_host');
 
             $output->writeln([
                 'Url Compresser',
                 '==============',
                 "Your base url is: {$url}",
-                "Your compress url is: {$urlCompressed}"
+                "Your compress url is: {$serverName}{$urlCompressed}"
             ]);
         }
     }

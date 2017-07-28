@@ -41,6 +41,31 @@ class UrlCompressHelper
         ]);
     }
 
+    public function removeOldUrls()
+    {
+        $doctrine = $this->container->get('doctrine');
+        $em = $doctrine->getManager();
+        $allUrls = $doctrine->getRepository(Url::class)->findAll();
+        $daysLimit = $this->container->getParameter('days_limit_to_remove');
+
+        $names = [];
+        foreach ($allUrls as $k => $url) {
+            $created = $url->getCreated();
+            $now = new \DateTime('now');
+            $diff = $now->diff($created);
+            $daysDiff = (int) $diff->format('%a');
+
+            if ($daysDiff >= $daysLimit) {
+                $names[] = $url->getUrl();
+                $em->remove($url);
+            }
+        }
+
+        if (!empty($names)) $em->flush();
+
+        return $names;
+    }
+
     private function getCompressedUrl()
     {
         $symbols = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
