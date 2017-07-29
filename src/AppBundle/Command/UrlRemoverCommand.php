@@ -13,8 +13,8 @@ class UrlRemoverCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('url:remove:old')
-             ->setDescription('Compress a url')
-             ->setHelp('This command give you short link of your url-address which should have the good response status');
+             ->setDescription('Remove old urls')
+             ->setHelp('This command remove old urls which older then % days');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

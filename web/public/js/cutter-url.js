@@ -10,8 +10,7 @@ $(function() {
             return false;
         }
 
-        // var pattern = /(http|ftp|https):\/\/[\w-]+(\.[\w-]{2,5})([\w.,@?^=%&amp;:\/~‌​+#-]*[\w@?^=%&amp;\/‌​~+#-])?/gi;
-        var pattern = /(http|https):\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
+        var pattern = /^((https|http):\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i;
         var res = Boolean (pattern.exec(url));
 
         if (!res) addAlertStyle($inputFrom);

@@ -15,6 +15,13 @@ class UrlCompressHelper
 
     public function saveUrl($url)
     {
+        if (!$this->isUrlValid($url)) {
+            return json_encode([
+                'status' => 'fail',
+                'code' => 'Url validation has failed'
+            ]);
+        }
+
         if (!$this->isGoodResponse($url)) {
             return json_encode([
                 'status' => 'fail',
@@ -81,7 +88,10 @@ class UrlCompressHelper
 
     private function isUrlValid($url)
     {
-        //
+        $pattern = '/^((https|http):\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i';
+        preg_match($pattern, $url, $matches, PREG_OFFSET_CAPTURE);
+
+        return (boolean) $matches;
     }
 
     private function isGoodResponse($url)
