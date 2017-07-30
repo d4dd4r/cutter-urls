@@ -7,6 +7,7 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utils\UrlCompressHelper;
+use AppBundle\Entity\Url;
 
 class CutterUrlController extends Controller
 {

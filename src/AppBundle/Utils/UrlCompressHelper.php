@@ -3,6 +3,7 @@
 namespace AppBundle\Utils;
 
 use AppBundle\Entity\Url;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UrlCompressHelper
 {
@@ -16,14 +17,14 @@ class UrlCompressHelper
     public function saveUrl($url)
     {
         if (!$this->isUrlValid($url)) {
-            return json_encode([
+            return new JsonResponse([
                 'status' => 'fail',
                 'code' => 'Url validation has failed'
             ]);
         }
 
         if (!$this->isGoodResponse($url)) {
-            return json_encode([
+            return new JsonResponse([
                 'status' => 'fail',
                 'code' => 'Url has wrong code response'
             ]);
@@ -39,7 +40,7 @@ class UrlCompressHelper
         $em->persist($urlEntity);
         $em->flush();
 
-        return json_encode([
+        return new JsonResponse([
             'status' => 'success',
             'data' => [
                 'url' => $url,

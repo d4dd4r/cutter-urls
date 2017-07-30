@@ -24,7 +24,8 @@ class UrlCompressCommand extends ContainerAwareCommand
         $container = $this->getContainer();
         $url = $input->getArgument('url');
         $urlHelper = new UrlCompressHelper($container);
-        $response = json_decode($urlHelper->saveUrl($url), true);
+        $response = $urlHelper->saveUrl($url);
+        $response = json_decode($response->getContent(), true);
 
         if ($response['status'] !== 'success') {
             $output->writeln([
@@ -37,13 +38,15 @@ class UrlCompressCommand extends ContainerAwareCommand
             ]);
         } else {
             $urlCompressed = $response['data']['urlCompressed'];
-            $serverName = $this->getContainer()->getParameter('server_host');
+            $serverHost = $this->getContainer()->getParameter('server_host');
+            $serverPort = $this->getContainer()->getParameter('server_port');
+            $serverUrl = "{$serverHost}:{$serverPort}";
 
             $output->writeln([
                 'Url Compresser',
                 '==============',
                 "Your base url is: {$url}",
-                "Your compress url is: {$serverName}{$urlCompressed}"
+                "Your compress url is: {$serverUrl}/{$urlCompressed}"
             ]);
         }
     }

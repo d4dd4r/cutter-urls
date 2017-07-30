@@ -15,5 +15,10 @@ parameters:
     mailer_user: ~
     mailer_password: ~
 
+    #custom params
+    days_limit_to_remove: 15
+    server_host: http://127.0.0.1
+    server_port: 8000
+
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt

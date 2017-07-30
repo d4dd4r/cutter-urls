@@ -33,7 +33,6 @@ $(function() {
                 spinner.stop();
             },
             success: function(data) {
-                if (data) data = JSON.parse(data);
                 if (data.status !== 'success') {
                     return alert('something went wrong.');
                 }
