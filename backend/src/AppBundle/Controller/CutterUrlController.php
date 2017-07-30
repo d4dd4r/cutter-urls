@@ -7,12 +7,21 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Utils\UrlCompressHelper;
+use AppBundle\Entity\Url;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CutterUrlController extends Controller
 {
     public function indexAction()
     {
         return $this->render('cutter-url/main.html.twig');
+    }
+
+    public function testAction(Request $request)
+    {
+        header('Access-Control-Allow-Origin: *');
+        // return 'testt';
+        return new JsonResponse('testtter');
     }
 
     public function infoAction()

@@ -12,6 +12,13 @@ cutter-main:
   path: /cutter-url/
   defaults: { _controller: AppBundle:CutterUrl:index }
 
+cutter-test:
+  path: /api/test
+  defaults: { _controller: AppBundle:CutterUrl:test }
+  requirements:
+    _format: json
+    methods: POST
+
 cutter-info:
   path: /cutter-url/info/
   defaults: { _controller: AppBundle:CutterUrl:info }
